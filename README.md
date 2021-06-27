@@ -28,7 +28,9 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
 
 
 ***H2 데이터베이스 In Memory Database로 사용하기
- '''<dependency>
+
+1. 의존성 
+ ```    <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
@@ -37,4 +39,5 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        '''
+ ```
+ 
