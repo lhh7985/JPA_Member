@@ -24,3 +24,17 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
     - 프로젝트의 복잡성이 커지면 난이도도 올라간다.
     - 잘못 구현된 경우 속도 저하 및 일관성이 깨질 수 있다.
 2. 프로시저가 많은 시스템에선 ORM의 객체 지향적인 장점을 활용하기 어렵다.
+
+
+
+***H2 데이터베이스 In Memory Database로 사용하기
+ '''<dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        '''
