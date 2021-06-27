@@ -29,8 +29,9 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
 
 ***H2 데이터베이스 In Memory Database로 사용하기
 
-1. 의존성 
- ```    <dependency>
+1. 의존성 추가
+ ```    
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
@@ -40,4 +41,34 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
  ```
+ 
+ 2. application properties 설정
+ ```
+ spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:demo
+#JPA 설정
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.properties.hibernate.show_sql = true
+#spring.jpa.properties.hibernate.format_sql = true
+#spring.jpa.properties.hibernate.use_sql_comments = true
+```
+
+   url을 지정하지 않으면 console창에 자동으로 생성되는 주소를 사용하여 접속하면 됩니다.
+ 
+ 3. Entity 객체를 만들어 localhost:8080/h2-console에 접속하여 확인
+ ```
+ @Data
+ @Entity
+ public class MemberVo {
+
+    @Id
+    private long memberNo;
+
+    private String id;
+    private String name;
+ }
+ 
+ ```
+ Entity 설정 후 @Id가 Primary key로 설정된다. 
+ In Memory Database에 MemberVo라는 테이블이 생성된다. 
  
