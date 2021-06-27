@@ -29,7 +29,7 @@ ORM( Object Relational Mapping, 객체 관계 매핑)
 
 
 
-**H2 데이터베이스 In Memory Database로 사용하기
+## H2 데이터베이스 In Memory Database로 사용하기
 
 1. 의존성 추가
  ```    
