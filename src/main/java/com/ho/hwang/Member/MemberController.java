@@ -22,7 +22,7 @@ public class MemberController {
     //모든 회원 조회
     @GetMapping
     public ResponseEntity<?> getAllMember(){
-        List<MemberVo> memberList = memberService.findAll();
+        List<Member> memberList = memberService.findAll();
         if(memberList.size() >0){
             return new ResponseEntity<>(memberList, HttpStatus.OK);
         }else
@@ -32,7 +32,7 @@ public class MemberController {
     //멤버번호로 회원 조회
     @GetMapping("/{memberNo}")
     public ResponseEntity<?> getMember(@PathVariable("memberNo") int memberNo){
-        Optional<MemberVo> member = memberService.findById(memberNo);
+        Optional<Member> member = memberService.findById(memberNo);
         //member가 null이 아닌지 체크
         if(member.isPresent()){
             return new ResponseEntity<>(member.get(), HttpStatus.OK);
@@ -42,14 +42,14 @@ public class MemberController {
 
     //멤버 등록
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody MemberVo memberVo){
-        return new ResponseEntity<>(memberService.save(memberVo), HttpStatus.OK);
+    public ResponseEntity<?> save(@RequestBody Member member){
+        return new ResponseEntity<>(memberService.save(member), HttpStatus.OK);
     }
 
     //멤버 번호로 정보 수정
     @PutMapping("/{memberNo}")
-    public ResponseEntity<?> modifyMember(@PathVariable("memberNo") int memberNo, @RequestBody MemberVo memberVo){
-        memberService.updateById(memberNo, memberVo);
+    public ResponseEntity<?> modifyMember(@PathVariable("memberNo") int memberNo, @RequestBody Member member){
+        memberService.updateById(memberNo, member);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

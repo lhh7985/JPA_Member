@@ -15,15 +15,15 @@ public class MemberService {
     //jpa에 findBy...함수가 이미 있기 때문에 메소드를 선언하지 않아도 사용가능
 
     //모든 회원을 조회하여 memberList에 저장
-    public List<MemberVo> findAll(){
-        List<MemberVo> memberList = new ArrayList<>();
+    public List<Member> findAll(){
+        List<Member> memberList = new ArrayList<>();
         memberRepository.findAll().forEach(e -> memberList.add(e));
         return memberList;
     }
 
     //멤버번호로 해당 멤버 정보를 찾아서 리턴
-    public Optional<MemberVo> findById(int memberNo){
-        Optional<MemberVo> member = memberRepository.findById(memberNo);
+    public Optional<Member> findById(int memberNo){
+        Optional<Member> member = memberRepository.findById(memberNo);
         return member;
     }
 
@@ -33,23 +33,23 @@ public class MemberService {
     }
 
     //입력 받은 멤버객체 정보를 저장 (save 메소드 )
-    public MemberVo save(MemberVo memberVo){
-        memberRepository.save(memberVo);
-        return memberVo;
+    public Member save(Member Member){
+        memberRepository.save(Member);
+        return Member;
     }
 
     //멤버정보 수정
-    public void updateById(int memberNo, MemberVo memberVo){
+    public void updateById(int memberNo, Member Member){
         //Optional은 해당 객체에 데이터가 있는지 없는지 확인
         //장점 : 예상하지 못한 NullPointerException을 간단히 회피할 수 있다.
         //      복잡한 조건문없이 .isPresent() 메소드로 확인가능
-        Optional<MemberVo> member = memberRepository.findById(memberNo);
+        Optional<Member> member = memberRepository.findById(memberNo);
 
         if(member.isPresent()){
-            member.get().setMemberNo(memberVo.getMemberNo());
-            member.get().setId(memberVo.getId());
-            member.get().setName(memberVo.getName());
-            memberRepository.save(memberVo);
+            member.get().setMemberNo(Member.getMemberNo());
+            member.get().setId(Member.getId());
+            member.get().setName(Member.getName());
+            memberRepository.save(Member);
         }
     }
 

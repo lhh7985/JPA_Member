@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.Statement;
 
 @Component
 public class PgSQLRunner implements ApplicationRunner {
@@ -18,7 +19,6 @@ public class PgSQLRunner implements ApplicationRunner {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try(Connection connection = datasource.getConnection()) {
@@ -27,9 +27,9 @@ public class PgSQLRunner implements ApplicationRunner {
             System.out.println(connection.getMetaData().getUserName());
 
             //create user table
-//            Statement statement = connection.createStatement();
-//            String sql = "create table users(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY(id))";
-//            statement.executeUpdate(sql);
+            Statement statement = connection.createStatement();
+            String sql = "create table users(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY(id))";
+            statement.executeUpdate(sql);
         }
         jdbcTemplate.execute("insert into users values(1, 'lhh')");
     }
