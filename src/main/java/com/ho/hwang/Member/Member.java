@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class MemberVo {
+public class Member {
 
     @Id
     private long memberNo;
@@ -17,12 +17,12 @@ public class MemberVo {
     private String name;
 
     @Builder
-    public MemberVo(String id, String name) {
+    public Member(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public MemberVo() {
+    public Member() {
 
     }
 }
