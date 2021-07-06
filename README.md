@@ -74,3 +74,60 @@ spring.jpa.properties.hibernate.show_sql = true
  Entity 설정 후 @Id가 Primary key로 설정된다. 
  In Memory Database에 MemberVo라는 테이블이 생성된다. 
  
+ 
+ ===============================
+ # PostgreSQL
+ 
+ 1. 의존성 
+ ```
+        <dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+ ```
+ 
+ 2. docker를 활용한 PostgreSQL 다운
+ ```
+    //Docker로 PostgreSQL DB생성
+    docker run -p 5432:5432 -e POSTGRES_PASSWORD=<원하는 비밀번호> -e POSTGRES_USER=<원하는 USERNAME> -e POSTGRES_DB=<원하는 DB명> --name postgres_boot -d postgres
+    
+    //postgres서버 실행
+    docker start <DB명>
+    
+    //bash 명령어로 바꾸기
+    docker exec -i -t postgres_boot bash
+    
+ ```
+ 
+ 3. Runner class 생성 후 Test
+ ```
+ @Component
+public class PgSQLRunner implements ApplicationRunner {
+
+    @Autowired
+    DataSource datasource;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+    
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        try(Connection connection = datasource.getConnection()) {
+            System.out.println(datasource.getClass());
+            System.out.println(connection.getMetaData().getURL());
+            System.out.println(connection.getMetaData().getUserName());
+
+            //create user table
+            Statement statement = connection.createStatement();
+            String sql = "create table users(ID INTEGER NOT NULL, name VARCHAR(255), PRIMARY KEY(id))";
+            statement.executeUpdate(sql);
+        }
+        jdbcTemplate.execute("insert into users values(1, 'lhh')");
+    }
+}
+```
+결과
+<img src="https://user-images.githubusercontent.com/59523147/124559068-3fa1af00-de76-11eb-9a47-2a52f1813dad.png">
+
+ 
+ 
