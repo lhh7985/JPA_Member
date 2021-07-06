@@ -78,7 +78,7 @@ spring.jpa.properties.hibernate.show_sql = true
  ===============================
  # PostgreSQL
  
- 1. 의존성 
+ 1. Dependency 추가
  ```
         <dependency>
 			<groupId>org.postgresql</groupId>
@@ -127,6 +127,7 @@ public class PgSQLRunner implements ApplicationRunner {
 }
 ```
 결과
+
 <img src="https://user-images.githubusercontent.com/59523147/124559068-3fa1af00-de76-11eb-9a47-2a52f1813dad.png">
 
  
